@@ -1,0 +1,2465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ============================================
+         META TAGS & SEO
+    ============================================= -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta Tags -->
+    <title>
+      StudyHub - Your Ultimate Study Companion | Free Notes, Videos & PYQs
+    </title>
+    <meta
+      name="title"
+      content="StudyHub - Your Ultimate Study Companion | Free Notes, Videos & PYQs"
+    />
+    <meta
+      name="description"
+      content="StudyHub is the ultimate PWA for students. Access thousands of notes, videos, previous year questions, tutorials, and study tools. 100% Free, works offline!"
+    />
+    <meta
+      name="keywords"
+      content="StudyHub, study app, student app, free notes, B.Tech notes, BCA notes, MCA notes, PYQ, previous year questions, video lectures, tutorials, SGPA calculator, Pomodoro timer, offline study app, PWA"
+    />
+    <meta name="author" content="Abhishek" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://studyhub.app/" />
+    <meta
+      property="og:title"
+      content="StudyHub - Your Ultimate Study Companion"
+    />
+    <meta
+      property="og:description"
+      content="Access thousands of notes, videos, PYQs, tutorials and study tools. 100% Free, works offline!"
+    />
+    <meta property="og:image" content="https://studyhub.app/og-image.png" />
+    <meta property="og:site_name" content="StudyHub" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://studyhub.app/" />
+    <meta
+      property="twitter:title"
+      content="StudyHub - Your Ultimate Study Companion"
+    />
+    <meta
+      property="twitter:description"
+      content="Access thousands of notes, videos, PYQs, tutorials and study tools. 100% Free!"
+    />
+    <meta
+      property="twitter:image"
+      content="https://studyhub.app/og-image.png"
+    />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6C63FF" />
+    <meta name="msapplication-navbutton-color" content="#6C63FF" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#6C63FF" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>"
+    />
+
+    <!-- ============================================
+         FONTS
+    ============================================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ============================================
+         EXTERNAL LIBRARIES
+    ============================================= -->
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- ============================================
+         STYLESHEET
+    ============================================= -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ============================================
+         🔄 PRELOADER
+    ============================================= -->
+    <div class="preloader" id="preloader">
+      <div class="preloader-content">
+        <div class="preloader-logo">
+          <span class="preloader-icon">📚</span>
+          <span class="preloader-text">StudyHub</span>
+        </div>
+        <div class="preloader-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+        </div>
+        <div class="preloader-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-text" id="progressText">Loading... 0%</span>
+        </div>
+        <div class="preloader-tips">
+          <span id="loadingTip">📖 Preparing your study materials...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         🍪 COOKIE CONSENT BANNER
+    ============================================= -->
+    <div class="cookie-consent" id="cookieConsent">
+      <div class="cookie-content">
+        <div class="cookie-icon">🍪</div>
+        <div class="cookie-text">
+          <h4>We Value Your Privacy</h4>
+          <p>
+            We use cookies to enhance your browsing experience and analyze site
+            traffic. By clicking "Accept All", you consent to our use of
+            cookies.
+          </p>
+        </div>
+        <div class="cookie-buttons">
+          <button class="cookie-btn cookie-btn-secondary" id="cookieSettings">
+            Settings
+          </button>
+          <button class="cookie-btn cookie-btn-primary" id="cookieAccept">
+            Accept All
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         💬 FLOATING SOCIAL BUTTONS
+    ============================================= -->
+    <div class="floating-social" id="floatingSocial">
+      <!-- Main Toggle Button -->
+      <button
+        class="floating-toggle"
+        id="floatingToggle"
+        aria-label="Open social menu"
+      >
+        <i class="fas fa-comment-dots"></i>
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Social Options -->
+      <div class="floating-options">
+        <a
+          href="https://wa.me/919876543210?text=Hi! I have a question about StudyHub"
+          target="_blank"
+          class="floating-option whatsapp"
+          aria-label="Chat on WhatsApp"
+        >
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a
+          href="https://t.me/studyhub_official"
+          target="_blank"
+          class="floating-option telegram"
+          aria-label="Join Telegram"
+        >
+          <i class="fab fa-telegram-plane"></i>
+          <span>Telegram</span>
+        </a>
+        <a
+          href="https://discord.gg/studyhub"
+          target="_blank"
+          class="floating-option discord"
+          aria-label="Join Discord"
+        >
+          <i class="fab fa-discord"></i>
+          <span>Discord</span>
+        </a>
+        <a
+          href="mailto:support@studyhub.app"
+          class="floating-option email"
+          aria-label="Send Email"
+        >
+          <i class="fas fa-envelope"></i>
+          <span>Email</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ============================================
+         ⬆️ BACK TO TOP BUTTON
+    ============================================= -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ============================================
+         🔝 NAVBAR
+    ============================================= -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <!-- Logo -->
+        <a href="#home" class="nav-logo">
+          <span class="logo-icon">📚</span>
+          <span class="logo-text">StudyHub</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#resources" class="nav-link">Resources</a></li>
+          <li><a href="#tools" class="nav-link">Tools</a></li>
+          <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+          <li><a href="#support" class="nav-link">Support</a></li>
+        </ul>
+
+        <!-- CTA Buttons -->
+        <div class="nav-actions">
+          <button
+            class="nav-theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle theme"
+          >
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+          </button>
+          <a href="https://ranvircmd.github.io/javasourcecode/" class="nav-cta" id="launchAppBtn">
+            <i class="fas fa-rocket"></i>
+            <span>Launch App</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          class="nav-mobile-toggle"
+          id="mobileMenuToggle"
+          aria-label="Toggle menu"
+        >
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ============================================
+         📱 MOBILE MENU
+    ============================================= -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-header">
+        <a href="#home" class="nav-logo">
+          <span class="logo-icon">📚</span>
+          <span class="logo-text">StudyHub</span>
+        </a>
+        <button
+          class="mobile-menu-close"
+          id="mobileMenuClose"
+          aria-label="Close menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li>
+          <a href="#home"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li>
+          <a href="#features"><i class="fas fa-star"></i> Features</a>
+        </li>
+        <li>
+          <a href="#resources"><i class="fas fa-book"></i> Resources</a>
+        </li>
+        <li>
+          <a href="#tools"><i class="fas fa-tools"></i> Tools</a>
+        </li>
+        <li>
+          <a href="#roadmap"><i class="fas fa-road"></i> Roadmap</a>
+        </li>
+        <li>
+          <a href="#faq"><i class="fas fa-question-circle"></i> FAQ</a>
+        </li>
+        <li>
+          <a href="#support"><i class="fas fa-heart"></i> Support</a>
+        </li>
+        <li>
+          <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        </li>
+      </ul>
+      <div class="mobile-menu-cta">
+        <a href="https://ranvircmd.github.io/javasourcecode/" class="btn btn-primary btn-block" id="mobileLaunchBtn">
+          <i class="fas fa-rocket"></i> Launch App
+        </a>
+        <a href="#" class="btn btn-secondary btn-block" id="mobileInstallBtn">
+          <i class="fas fa-download"></i> Install App
+        </a>
+      </div>
+      <div class="mobile-menu-social">
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <!-- ============================================
+         🎨 MAIN CONTENT
+    ============================================= -->
+    <main>
+      <!-- ============================================
+             🚀 HERO SECTION
+        ============================================= -->
+      <section class="hero" id="home">
+        <!-- Animated Background -->
+        <div class="hero-bg">
+          <div class="hero-blob blob-1"></div>
+          <div class="hero-blob blob-2"></div>
+          <div class="hero-blob blob-3"></div>
+          <div class="hero-particles" id="heroParticles"></div>
+        </div>
+
+        <div class="container">
+          <div class="hero-content">
+            <!-- Left Content -->
+            <div class="hero-text" data-aos="fade-right">
+              <!-- Badge -->
+              <div class="hero-badge">
+                <span class="badge-icon">🎉</span>
+                <span class="badge-text">100% Free & Open Source</span>
+                <span class="badge-new">NEW</span>
+              </div>
+
+              <!-- Heading -->
+              <h1 class="hero-title">
+                Your Ultimate
+                <span class="gradient-text">Study Companion</span>
+                <span class="typing-wrapper">
+                  for <span class="typing-text" id="typingText"></span
+                  ><span class="typing-cursor">|</span>
+                </span>
+              </h1>
+
+              <!-- Description -->
+              <p class="hero-description">
+                Access <strong>thousands of notes</strong>, video lectures,
+                previous year questions, and interactive tutorials. All in one
+                beautiful PWA.
+                <strong>Works offline. 100% Free forever.</strong>
+              </p>
+
+              <!-- CTA Buttons -->
+              <div class="hero-buttons">
+                <a href="https://ranvircmd.github.io/javasourcecode/" class="btn btn-primary btn-lg" id="heroLaunchBtn">
+                  <i class="fas fa-rocket"></i>
+                  <span>Launch App Now</span>
+                </a>
+                <a href="#" class="btn btn-success btn-lg" id="heroInstallBtn">
+                  <i class="fas fa-download"></i>
+                  <span>Install App</span>
+                </a>
+                <a href="#demo" class="btn btn-secondary btn-lg">
+                  <i class="fas fa-play-circle"></i>
+                  <span>Watch Demo</span>
+                </a>
+              </div>
+
+              <!-- Trust Indicators -->
+              <div class="hero-trust">
+                <div class="trust-avatars">
+                  <div class="avatar">👨‍🎓</div>
+                  <div class="avatar">👩‍🎓</div>
+                  <div class="avatar">👨‍💻</div>
+                  <div class="avatar">👩‍💻</div>
+                  <div class="avatar avatar-more">+5K</div>
+                </div>
+                <div class="trust-text">
+                  <div class="trust-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>4.8/5</span>
+                  </div>
+                  <p>Trusted by <strong>10,000+</strong> students</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Content - Phone Mockup -->
+            <div class="hero-visual" data-aos="fade-left" data-aos-delay="200">
+              <div class="phone-mockup">
+                <div class="phone-frame">
+                  <div class="phone-notch"></div>
+                  <div class="phone-screen">
+                    <!-- Screen Content -->
+                    <div class="screen-header">
+                      <span class="screen-logo">📚 StudyHub</span>
+                      <div class="screen-icons">
+                        <i class="fas fa-search"></i>
+                        <i class="fas fa-moon"></i>
+                      </div>
+                    </div>
+                    <div class="screen-greeting">
+                      <h3>Hello, Student! 👋</h3>
+                      <p>What would you like to learn?</p>
+                    </div>
+                    <div class="screen-categories">
+                      <div class="screen-cat">
+                        <i class="fas fa-book"></i>
+                        <span>Notes</span>
+                      </div>
+                      <div class="screen-cat">
+                        <i class="fas fa-video"></i>
+                        <span>Videos</span>
+                      </div>
+                      <div class="screen-cat">
+                        <i class="fas fa-file-alt"></i>
+                        <span>PYQs</span>
+                      </div>
+                      <div class="screen-cat">
+                        <i class="fas fa-code"></i>
+                        <span>Tutorials</span>
+                      </div>
+                    </div>
+                    <div class="screen-card">
+                      <div class="card-thumb">📄</div>
+                      <div class="card-info">
+                        <h4>Data Structures Notes</h4>
+                        <p>CSE • Sem 3 • 1.2K views</p>
+                      </div>
+                      <button class="card-btn">
+                        <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    <div class="screen-nav">
+                      <div class="nav-item active">
+                        <i class="fas fa-home"></i>
+                      </div>
+                      <div class="nav-item"><i class="fas fa-book"></i></div>
+                      <div class="nav-item"><i class="fas fa-play"></i></div>
+                      <div class="nav-item"><i class="fas fa-tools"></i></div>
+                      <div class="nav-item"><i class="fas fa-user"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating Elements -->
+              <div class="floating-card card-1">
+                <i class="fas fa-check-circle"></i>
+                <span>100% Free</span>
+              </div>
+              <div class="floating-card card-2">
+                <i class="fas fa-wifi-slash"></i>
+                <span>Works Offline</span>
+              </div>
+              <div class="floating-card card-3">
+                <i class="fas fa-mobile-alt"></i>
+                <span>PWA Ready</span>
+              </div>
+              <div class="floating-card card-4">
+                <i class="fas fa-shield-alt"></i>
+                <span>No Login Required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-book-open"></i></div>
+              <div class="stat-number" data-count="5000">0</div>
+              <div class="stat-label">Study Materials</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-users"></i></div>
+              <div class="stat-number" data-count="10000">0</div>
+              <div class="stat-label">Active Students</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+              <div class="stat-number" data-count="50">0</div>
+              <div class="stat-label">Courses Covered</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i class="fas fa-star"></i></div>
+              <div class="stat-number" data-count="4.8" data-decimal="true">
+                0
+              </div>
+              <div class="stat-label">User Rating</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+          <div class="mouse">
+            <div class="wheel"></div>
+          </div>
+          <span>Scroll Down</span>
+        </div>
+      </section>
+
+      <!-- ============================================
+             🏆 FEATURED ON / TRUST BADGES
+        ============================================= -->
+      <section class="featured-on" id="featured">
+        <div class="container">
+          <div class="featured-header" data-aos="fade-up">
+            <span class="section-badge">🏆 Recognition</span>
+            <h2>Featured On & Trusted By</h2>
+          </div>
+
+          <div class="featured-logos" data-aos="fade-up" data-aos-delay="100">
+            <div class="logo-item">
+              <i class="fab fa-product-hunt"></i>
+              <span>Product Hunt</span>
+            </div>
+            <div class="logo-item">
+              <i class="fab fa-github"></i>
+              <span>GitHub</span>
+            </div>
+            <div class="logo-item">
+              <i class="fab fa-dev"></i>
+              <span>DEV.to</span>
+            </div>
+            <div class="logo-item">
+              <i class="fab fa-hackerrank"></i>
+              <span>HackerRank</span>
+            </div>
+            <div class="logo-item">
+              <i class="fas fa-graduation-cap"></i>
+              <span>EdTech Weekly</span>
+            </div>
+            <div class="logo-item">
+              <i class="fas fa-newspaper"></i>
+              <span>TechCrunch</span>
+            </div>
+          </div>
+
+          <div class="featured-badges" data-aos="fade-up" data-aos-delay="200">
+            <div class="badge-item">
+              <i class="fas fa-award"></i>
+              <span>Best Study App 2024</span>
+            </div>
+            <div class="badge-item">
+              <i class="fas fa-star"></i>
+              <span>Top Rated PWA</span>
+            </div>
+            <div class="badge-item">
+              <i class="fas fa-users"></i>
+              <span>10K+ Downloads</span>
+            </div>
+            <div class="badge-item">
+              <i class="fas fa-code"></i>
+              <span>Open Source</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             ✨ FEATURES SECTION
+        ============================================= -->
+      <section class="features" id="features">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">✨ Features</span>
+            <h2>
+              Everything You Need to <span class="gradient-text">Excel</span>
+            </h2>
+            <p>
+              StudyHub comes packed with powerful features designed to
+              supercharge your learning experience.
+            </p>
+          </div>
+
+          <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="feature-icon gradient-1">
+                <i class="fas fa-book-open"></i>
+              </div>
+              <h3>Comprehensive Notes</h3>
+              <p>
+                Access quality notes for all subjects, organized by course,
+                branch, and semester. Verified by experts.
+              </p>
+              <div class="feature-tags">
+                <span class="tag">B.Tech</span>
+                <span class="tag">BCA</span>
+                <span class="tag">MCA</span>
+                <span class="tag">B.Sc</span>
+              </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="150">
+              <div class="feature-icon gradient-2">
+                <i class="fas fa-play-circle"></i>
+              </div>
+              <h3>Video Lectures</h3>
+              <p>
+                Watch curated video lectures from top educators. Learn complex
+                topics through visual explanations.
+              </p>
+              <div class="feature-tags">
+                <span class="tag">YouTube</span>
+                <span class="tag">Curated</span>
+                <span class="tag">HD Quality</span>
+              </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="feature-icon gradient-3">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <h3>Previous Year Questions</h3>
+              <p>
+                Practice with real exam papers. Organized year-wise with
+                solutions. Boost your exam preparation.
+              </p>
+              <div class="feature-tags">
+                <span class="tag">Solved</span>
+                <span class="tag">Year-wise</span>
+                <span class="tag">Updated</span>
+              </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="250">
+              <div class="feature-icon gradient-4">
+                <i class="fas fa-code"></i>
+              </div>
+              <h3>Interactive Tutorials</h3>
+              <p>
+                Learn programming languages with structured tutorials. Syntax
+                highlighting and cheatsheets included.
+              </p>
+              <div class="feature-tags">
+                <span class="tag">C/C++</span>
+                <span class="tag">Python</span>
+                <span class="tag">Java</span>
+                <span class="tag">Web</span>
+              </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+              <div class="feature-icon gradient-5">
+                <i class="fas fa-cloud-download-alt"></i>
+              </div>
+              <h3>Offline Access</h3>
+              <p>
+                Works without internet! Data is cached locally. Access your
+                bookmarks and recent items anytime.
+              </p>
+              <div class="feature-tags">
+                <span class="tag">PWA</span>
+                <span class="tag">Cached</span>
+                <span class="tag">Fast</span>
+              </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="350">
+              <div class="feature-icon gradient-6">
+                <i class="fas fa-moon"></i>
+              </div>
+              <h3>Dark Mode</h3>
+              <p>
+                Beautiful dark theme to reduce eye strain during late night
+                study sessions. Toggle anytime.
+              </p>
+              <div class="feature-tags">
+                <span class="tag">Eye-friendly</span>
+                <span class="tag">Neumorphic</span>
+                <span class="tag">Smooth</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             📚 RESOURCES SECTION
+        ============================================= -->
+      <section class="resources" id="resources">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">📚 Resources</span>
+            <h2>Explore Our <span class="gradient-text">Rich Content</span></h2>
+            <p>Thousands of high-quality study materials at your fingertips.</p>
+          </div>
+
+          <div class="resources-grid">
+            <!-- Resource 1 -->
+            <div class="resource-card" data-aos="zoom-in" data-aos-delay="100">
+              <div class="resource-icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <div class="resource-content">
+                <h3>Notes</h3>
+                <p>Comprehensive study notes for all subjects</p>
+                <div class="resource-count">
+                  <span class="count" data-count="2000">0</span>
+                  <span class="label">Files</span>
+                </div>
+              </div>
+              <div class="resource-hover">
+                <a href="#" class="btn btn-light"
+                  >Explore Notes <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- Resource 2 -->
+            <div class="resource-card" data-aos="zoom-in" data-aos-delay="150">
+              <div class="resource-icon">
+                <i class="fas fa-video"></i>
+              </div>
+              <div class="resource-content">
+                <h3>Videos</h3>
+                <p>Curated video lectures from experts</p>
+                <div class="resource-count">
+                  <span class="count" data-count="1500">0</span>
+                  <span class="label">Videos</span>
+                </div>
+              </div>
+              <div class="resource-hover">
+                <a href="#" class="btn btn-light"
+                  >Watch Videos <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- Resource 3 -->
+            <div class="resource-card" data-aos="zoom-in" data-aos-delay="200">
+              <div class="resource-icon">
+                <i class="fas fa-clipboard-list"></i>
+              </div>
+              <div class="resource-content">
+                <h3>PYQs</h3>
+                <p>Previous year question papers</p>
+                <div class="resource-count">
+                  <span class="count" data-count="1000">0</span>
+                  <span class="label">Papers</span>
+                </div>
+              </div>
+              <div class="resource-hover">
+                <a href="#" class="btn btn-light"
+                  >View PYQs <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+
+            <!-- Resource 4 -->
+            <div class="resource-card" data-aos="zoom-in" data-aos-delay="250">
+              <div class="resource-icon">
+                <i class="fas fa-laptop-code"></i>
+              </div>
+              <div class="resource-content">
+                <h3>Tutorials</h3>
+                <p>Programming tutorials & guides</p>
+                <div class="resource-count">
+                  <span class="count" data-count="500">0</span>
+                  <span class="label">Topics</span>
+                </div>
+              </div>
+              <div class="resource-hover">
+                <a href="#" class="btn btn-light"
+                  >Start Learning <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             🎓 COURSES MARQUEE
+        ============================================= -->
+      <section class="courses-marquee">
+        <div class="marquee-track marquee-left">
+          <div class="marquee-content">
+            <span class="course-tag"
+              ><i class="fas fa-microchip"></i> B.Tech CSE</span
+            >
+            <span class="course-tag"><i class="fas fa-laptop"></i> BCA</span>
+            <span class="course-tag"><i class="fas fa-database"></i> MCA</span>
+            <span class="course-tag"
+              ><i class="fas fa-bolt"></i> B.Tech ECE</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-plug"></i> B.Tech EEE</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-cogs"></i> B.Tech ME</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-building"></i> B.Tech CE</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-network-wired"></i> B.Tech IT</span
+            >
+            <span class="course-tag"><i class="fas fa-flask"></i> B.Sc</span>
+            <span class="course-tag"
+              ><i class="fas fa-chart-line"></i> BBA</span
+            >
+            <!-- Duplicate for seamless loop -->
+            <span class="course-tag"
+              ><i class="fas fa-microchip"></i> B.Tech CSE</span
+            >
+            <span class="course-tag"><i class="fas fa-laptop"></i> BCA</span>
+            <span class="course-tag"><i class="fas fa-database"></i> MCA</span>
+            <span class="course-tag"
+              ><i class="fas fa-bolt"></i> B.Tech ECE</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-plug"></i> B.Tech EEE</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-cogs"></i> B.Tech ME</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-building"></i> B.Tech CE</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-network-wired"></i> B.Tech IT</span
+            >
+            <span class="course-tag"><i class="fas fa-flask"></i> B.Sc</span>
+            <span class="course-tag"
+              ><i class="fas fa-chart-line"></i> BBA</span
+            >
+          </div>
+        </div>
+        <div class="marquee-track marquee-right">
+          <div class="marquee-content">
+            <span class="course-tag"><i class="fas fa-code"></i> Python</span>
+            <span class="course-tag"><i class="fas fa-code"></i> Java</span>
+            <span class="course-tag"><i class="fas fa-code"></i> C/C++</span>
+            <span class="course-tag"
+              ><i class="fab fa-html5"></i> HTML/CSS</span
+            >
+            <span class="course-tag"><i class="fab fa-js"></i> JavaScript</span>
+            <span class="course-tag"><i class="fab fa-react"></i> React</span>
+            <span class="course-tag"><i class="fas fa-database"></i> SQL</span>
+            <span class="course-tag"
+              ><i class="fas fa-brain"></i> Data Structures</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-project-diagram"></i> Algorithms</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-robot"></i> Machine Learning</span
+            >
+            <!-- Duplicate for seamless loop -->
+            <span class="course-tag"><i class="fas fa-code"></i> Python</span>
+            <span class="course-tag"><i class="fas fa-code"></i> Java</span>
+            <span class="course-tag"><i class="fas fa-code"></i> C/C++</span>
+            <span class="course-tag"
+              ><i class="fab fa-html5"></i> HTML/CSS</span
+            >
+            <span class="course-tag"><i class="fab fa-js"></i> JavaScript</span>
+            <span class="course-tag"><i class="fab fa-react"></i> React</span>
+            <span class="course-tag"><i class="fas fa-database"></i> SQL</span>
+            <span class="course-tag"
+              ><i class="fas fa-brain"></i> Data Structures</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-project-diagram"></i> Algorithms</span
+            >
+            <span class="course-tag"
+              ><i class="fas fa-robot"></i> Machine Learning</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             📹 VIDEO DEMO SECTION
+        ============================================= -->
+      <section class="video-demo" id="demo">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">📹 Demo</span>
+            <h2>See StudyHub in <span class="gradient-text">Action</span></h2>
+            <p>
+              Watch how StudyHub can transform your study experience in just 2
+              minutes.
+            </p>
+          </div>
+
+          <div class="video-container" data-aos="zoom-in" data-aos-delay="200">
+            <div class="video-wrapper">
+              <div class="video-thumbnail" id="videoThumbnail">
+                <img
+                  src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+                  alt="Video Thumbnail"
+                />
+                <div class="video-overlay">
+                  <button class="play-button" id="playButton">
+                    <i class="fas fa-play"></i>
+                  </button>
+                </div>
+                <div class="video-duration">2:30</div>
+              </div>
+              <div class="video-iframe" id="videoIframe">
+                <!-- YouTube iframe will be inserted here -->
+              </div>
+            </div>
+
+            <div class="video-features">
+              <div class="video-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Easy Navigation</span>
+              </div>
+              <div class="video-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Quick Search</span>
+              </div>
+              <div class="video-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Offline Mode</span>
+              </div>
+              <div class="video-feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Dark Theme</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             🛠️ TOOLS SECTION
+        ============================================= -->
+      <section class="tools" id="tools">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">🛠️ Productivity</span>
+            <h2>Built-in <span class="gradient-text">Study Tools</span></h2>
+            <p>
+              Powerful tools to boost your productivity and track your progress.
+            </p>
+          </div>
+
+          <div class="tools-grid">
+            <!-- Tool 1 -->
+            <div class="tool-card" data-aos="fade-right" data-aos-delay="100">
+              <div class="tool-icon">
+                <i class="fas fa-tasks"></i>
+              </div>
+              <div class="tool-content">
+                <h3>📝 To-Do List & Syllabus Tracker</h3>
+                <p>
+                  Track your study tasks and syllabus completion. Visual
+                  progress bar shows how much you've covered. Never miss a topic
+                  again!
+                </p>
+                <ul class="tool-features">
+                  <li><i class="fas fa-check"></i> Add unlimited tasks</li>
+                  <li><i class="fas fa-check"></i> Progress visualization</li>
+                  <li><i class="fas fa-check"></i> Persistent storage</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Tool 2 -->
+            <div class="tool-card" data-aos="fade-left" data-aos-delay="150">
+              <div class="tool-icon">
+                <i class="fas fa-calculator"></i>
+              </div>
+              <div class="tool-content">
+                <h3>📊 SGPA Calculator</h3>
+                <p>
+                  Calculate your semester GPA instantly. Add subjects with
+                  credits and grades. Get accurate results with beautiful UI.
+                </p>
+                <ul class="tool-features">
+                  <li><i class="fas fa-check"></i> Multiple grading systems</li>
+                  <li><i class="fas fa-check"></i> CGPA calculation</li>
+                  <li><i class="fas fa-check"></i> Export results</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Tool 3 -->
+            <div class="tool-card" data-aos="fade-right" data-aos-delay="200">
+              <div class="tool-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="tool-content">
+                <h3>⏱️ Pomodoro Timer</h3>
+                <p>
+                  Focus better with 25-min study sessions and 5-min breaks.
+                  Customizable durations. Auto-switches between focus and rest.
+                </p>
+                <ul class="tool-features">
+                  <li><i class="fas fa-check"></i> Customizable intervals</li>
+                  <li><i class="fas fa-check"></i> Sound notifications</li>
+                  <li><i class="fas fa-check"></i> Session tracking</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Tool 4 -->
+            <div class="tool-card" data-aos="fade-left" data-aos-delay="250">
+              <div class="tool-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <div class="tool-content">
+                <h3>📅 Exam Countdown</h3>
+                <p>
+                  Set your exam date and see days remaining on home screen. Stay
+                  motivated with deadline awareness. Never procrastinate!
+                </p>
+                <ul class="tool-features">
+                  <li><i class="fas fa-check"></i> Multiple exam dates</li>
+                  <li><i class="fas fa-check"></i> Widget display</li>
+                  <li><i class="fas fa-check"></i> Reminder alerts</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             📱 APP SCREENSHOTS
+        ============================================= -->
+      <section class="screenshots" id="screenshots">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">📱 Preview</span>
+            <h2>Beautiful <span class="gradient-text">User Interface</span></h2>
+            <p>
+              Modern neumorphic design with smooth animations and intuitive
+              navigation.
+            </p>
+          </div>
+
+          <div
+            class="screenshots-slider"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="screenshot-item">
+              <div class="screenshot-phone">
+                <div class="screenshot-screen">
+                  <div class="screen-header-mini">
+                    <span>📚 Home</span>
+                  </div>
+                  <div class="screen-content">
+                    <img
+                      src="https://i.ibb.co/4g95bKDy/image.png"
+                      alt="Home Screen Screenshot"
+                      class="screenshot-img"
+                      loading="lazy"
+                    />
+
+                    <div class="skeleton skeleton-lg"></div>
+                    <div class="skeleton skeleton-md"></div>
+                    <div class="skeleton skeleton-sm"></div>
+                    <div class="skeleton skeleton-sm"></div>
+                  </div>
+                </div>
+              </div>
+              <span class="screenshot-label">Home Screen</span>
+            </div>
+
+            <div class="screenshot-item">
+              <div class="screenshot-phone">
+                <div class="screenshot-screen">
+                  <div class="screen-header-mini">
+                    <span>📖 Notes</span>
+                  </div>
+                  <div class="screen-content">
+                                        <img
+                      src="https://i.ibb.co/BVYtNKCw/image.png"
+                      alt="Home Screen Screenshot"
+                      class="screenshot-img"
+                      
+                    />
+                    <div class="skeleton skeleton-card"></div>
+                    <div class="skeleton skeleton-card"></div>
+                    <div class="skeleton skeleton-card"></div>
+                  </div>
+                </div>
+              </div>
+              <span class="screenshot-label">Notes Browser</span>
+            </div>
+
+            <div class="screenshot-item">
+              <div class="screenshot-phone">
+                <div class="screenshot-screen dark-screen">
+                  <div class="screen-header-mini">
+                    <span>🌙 Dark Mode</span>
+                  </div>
+                  <div class="screen-content">
+                    <img src="https://i.ibb.co/q3r7p9W7/image.png"/>
+                    <div class="skeleton skeleton-dark skeleton-lg"></div>
+                    <div class="skeleton skeleton-dark skeleton-md"></div>
+                    <div class="skeleton skeleton-dark skeleton-sm"></div>
+                  </div>
+                </div>
+              </div>
+              <span class="screenshot-label">Dark Theme</span>
+            </div>
+
+            <div class="screenshot-item">
+              <div class="screenshot-phone">
+                <div class="screenshot-screen">
+                  <div class="screen-header-mini">
+                    <span>🛠️ Tools</span>
+                  </div>
+                  <div class="screen-content">
+                    <img src="https://i.ibb.co/FLHthQwC/image.png"/>
+                    <div class="skeleton skeleton-tool"></div>
+                    <div class="skeleton skeleton-tool"></div>
+                    <div class="skeleton skeleton-tool"></div>
+                    <div class="skeleton skeleton-tool"></div>
+                  </div>
+                </div>
+              </div>
+              <span class="screenshot-label">Study Tools</span>
+            </div>
+
+            <div class="screenshot-item">
+              <div class="screenshot-phone">
+                <div class="screenshot-screen">
+                  <div class="screen-header-mini">
+                    <span>👤 Profile</span>
+                  </div>
+                  <div class="screen-content">
+                    <img src="https://i.ibb.co/Hf3bmDRf/image.png"/>
+                    <div class="skeleton skeleton-avatar"></div>
+                    <div class="skeleton skeleton-md"></div>
+                    <div class="skeleton skeleton-sm"></div>
+                    <div class="skeleton skeleton-sm"></div>
+                  </div>
+                </div>
+              </div>
+              <span class="screenshot-label">Profile Page</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             📱 QR CODE SECTION
+        ============================================= -->
+      <section class="qr-section" id="qrcode">
+        <div class="container">
+          <div class="qr-content" data-aos="fade-up">
+            <div class="qr-text">
+              <span class="section-badge">📱 Quick Access</span>
+              <h2>
+                Scan to <span class="gradient-text">Access Instantly</span>
+              </h2>
+              <p>
+                Open your phone camera and scan the QR code to access StudyHub
+                directly. No app store needed!
+              </p>
+              <ul class="qr-benefits">
+                <li>
+                  <i class="fas fa-check-circle"></i> Instant access on mobile
+                </li>
+                <li><i class="fas fa-check-circle"></i> Add to home screen</li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Works like native app
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> No download required
+                </li>
+              </ul>
+            </div>
+            <div
+              class="qr-code-wrapper"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
+              <div class="qr-card">
+                <div class="qr-code" id="qrCode">
+                  <!-- QR Code will be generated here -->
+                  <div class="qr-placeholder">
+                    <i class="fas fa-qrcode"></i>
+                  </div>
+                </div>
+                <p class="qr-label">Scan with your camera</p>
+                <div class="qr-actions">
+                  <button class="btn btn-secondary btn-sm" id="downloadQR">
+                    <i class="fas fa-download"></i> Download QR
+                  </button>
+                  <button class="btn btn-primary btn-sm" id="copyLink">
+                    <i class="fas fa-copy"></i> Copy Link
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             🗺️ ROADMAP SECTION
+        ============================================= -->
+      <section class="roadmap" id="roadmap">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">🗺️ Roadmap</span>
+            <h2>What's <span class="gradient-text">Coming Next</span></h2>
+            <p>
+              Exciting features we're working on to make StudyHub even better.
+            </p>
+          </div>
+
+          <div class="roadmap-timeline">
+            <!-- Past -->
+            <div
+              class="timeline-item completed"
+              data-aos="fade-right"
+              data-aos-delay="100"
+            >
+              <div class="timeline-marker">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-date">January 2024</span>
+                <h3>🚀 Version 1.0 Launch</h3>
+                <p>
+                  Initial release with notes, videos, PYQs, and basic tools.
+                </p>
+                <div class="timeline-tags">
+                  <span class="tag completed">Completed</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Past -->
+            <div
+              class="timeline-item completed"
+              data-aos="fade-left"
+              data-aos-delay="150"
+            >
+              <div class="timeline-marker">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-date">February 2024</span>
+                <h3>🌙 Dark Mode & PWA</h3>
+                <p>Added dark theme, offline support, and installable PWA.</p>
+                <div class="timeline-tags">
+                  <span class="tag completed">Completed</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Current -->
+            <div
+              class="timeline-item current"
+              data-aos="fade-right"
+              data-aos-delay="200"
+            >
+              <div class="timeline-marker">
+                <i class="fas fa-code"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-date">March 2024</span>
+                <h3>💬 Community Features</h3>
+                <p>Discussion forums, Q&A section, and peer collaboration.</p>
+                <div class="timeline-tags">
+                  <span class="tag in-progress">In Progress</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Future -->
+            <div
+              class="timeline-item upcoming"
+              data-aos="fade-left"
+              data-aos-delay="250"
+            >
+              <div class="timeline-marker">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-date">April 2024</span>
+                <h3>🤖 AI Study Assistant</h3>
+                <p>
+                  AI-powered doubt solving and personalized recommendations.
+                </p>
+                <div class="timeline-tags">
+                  <span class="tag upcoming">Upcoming</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Future -->
+            <div
+              class="timeline-item upcoming"
+              data-aos="fade-right"
+              data-aos-delay="300"
+            >
+              <div class="timeline-marker">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-date">May 2024</span>
+                <h3>📝 Quiz & Practice Tests</h3>
+                <p>
+                  Interactive quizzes, mock tests, and performance analytics.
+                </p>
+                <div class="timeline-tags">
+                  <span class="tag upcoming">Upcoming</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Future -->
+            <div
+              class="timeline-item upcoming"
+              data-aos="fade-left"
+              data-aos-delay="350"
+            >
+              <div class="timeline-marker">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-date">June 2024</span>
+                <h3>📱 Native Mobile Apps</h3>
+                <p>Dedicated Android and iOS apps for enhanced experience.</p>
+                <div class="timeline-tags">
+                  <span class="tag upcoming">Upcoming</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="roadmap-cta" data-aos="fade-up" data-aos-delay="400">
+            <p>Have a feature request?</p>
+            <a href="#contact" class="btn btn-secondary">
+              <i class="fas fa-lightbulb"></i> Suggest Feature
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             💡 WHY CHOOSE US
+        ============================================= -->
+      <section class="why-choose" id="why">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">💡 Why Us?</span>
+            <h2>Why Students <span class="gradient-text">Love Us</span></h2>
+            <p>
+              Here's what makes StudyHub the preferred choice for thousands of
+              students.
+            </p>
+          </div>
+
+          <div class="why-grid">
+            <div class="why-card" data-aos="flip-up" data-aos-delay="100">
+              <div class="why-icon">
+                <i class="fas fa-dollar-sign"></i>
+              </div>
+              <h3>100% Free Forever</h3>
+              <p>
+                No hidden costs, no premium tiers, no ads. All features
+                available for free, always.
+              </p>
+            </div>
+
+            <div class="why-card" data-aos="flip-up" data-aos-delay="150">
+              <div class="why-icon">
+                <i class="fas fa-wifi"></i>
+              </div>
+              <h3>Works Offline</h3>
+              <p>
+                Download and access your study materials even without internet
+                connection.
+              </p>
+            </div>
+
+            <div class="why-card" data-aos="flip-up" data-aos-delay="200">
+              <div class="why-icon">
+                <i class="fas fa-lock-open"></i>
+              </div>
+              <h3>No Login Required</h3>
+              <p>
+                Start learning immediately. No account creation, no personal
+                data collection.
+              </p>
+            </div>
+
+            <div class="why-card" data-aos="flip-up" data-aos-delay="250">
+              <div class="why-icon">
+                <i class="fas fa-sync"></i>
+              </div>
+              <h3>Always Updated</h3>
+              <p>
+                New resources added regularly. Stay updated with latest study
+                materials.
+              </p>
+            </div>
+
+            <div class="why-card" data-aos="flip-up" data-aos-delay="300">
+              <div class="why-icon">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <h3>Lightning Fast</h3>
+              <p>
+                Optimized for performance. Loads instantly even on slow
+                connections.
+              </p>
+            </div>
+
+            <div class="why-card" data-aos="flip-up" data-aos-delay="350">
+              <div class="why-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h3>Made with Love</h3>
+              <p>Built by students, for students. We understand your needs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             💬 FAQ ACCORDION
+        ============================================= -->
+      <section class="faq" id="faq">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">❓ FAQ</span>
+            <h2>
+              Frequently Asked <span class="gradient-text">Questions</span>
+            </h2>
+            <p>
+              Got questions? We've got answers. Find everything you need to know
+              about StudyHub.
+            </p>
+          </div>
+
+          <div class="faq-container" data-aos="fade-up" data-aos-delay="200">
+            <!-- FAQ Item 1 -->
+            <div class="faq-item">
+              <button class="faq-question">
+                <span>What is StudyHub?</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  StudyHub is a Progressive Web App (PWA) designed for students
+                  to access educational resources including notes, video
+                  lectures, previous year questions, and interactive tutorials.
+                  It works offline, is 100% free, and requires no login.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="faq-item">
+              <button class="faq-question">
+                <span>Is StudyHub really free?</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Yes! StudyHub is completely free with no hidden charges, no
+                  premium subscriptions, and no ads. All features are available
+                  to everyone. We believe education should be accessible to all.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="faq-item">
+              <button class="faq-question">
+                <span>How do I install StudyHub on my phone?</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  StudyHub is a PWA, so you can install it directly from your
+                  browser:
+                </p>
+                <ul>
+                  <li>
+                    <strong>Android/Chrome:</strong> Click the "Install" button
+                    or tap the menu (⋮) → "Add to Home Screen"
+                  </li>
+                  <li>
+                    <strong>iOS/Safari:</strong> Tap the Share button → "Add to
+                    Home Screen"
+                  </li>
+                </ul>
+                <p>Once installed, it works just like a native app!</p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="faq-item">
+              <button class="faq-question">
+                <span>Does StudyHub work offline?</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Yes! StudyHub uses service workers to cache data locally.
+                  After your first visit, you can access previously loaded
+                  content even without an internet connection. Your bookmarks
+                  and recent items are always available offline.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 5 -->
+            <div class="faq-item">
+              <button class="faq-question">
+                <span>Which courses and subjects are covered?</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>StudyHub covers a wide range of courses including:</p>
+                <ul>
+                  <li>B.Tech (CSE, IT, ECE, EEE, ME, CE, etc.)</li>
+                  <li>BCA, MCA, B.Sc, BBA</li>
+                  <li>
+                    Programming Languages (C, C++, Java, Python, JavaScript,
+                    etc.)
+                  </li>
+                  <li>Core subjects (Data Structures, DBMS, OS, CN, etc.)</li>
+                </ul>
+                <p>We're constantly adding more content!</p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 6 -->
+            <div class="faq-item">
+              <button class="faq-question">
+                <span>How can I request new study materials?</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  If you can't find what you're looking for, you can request new
+                  materials through our Request Form. Just fill in the details
+                  of what you need, and our team will try to add it as soon as
+                  possible.
+                </p>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSeE2QjRDeyfPm3CXezjlMPuzfE-nPhquPiPU_mPp2lfK8Vuww/viewform"
+                  target="_blank"
+                  class="btn btn-secondary btn-sm"
+                >
+                  <i class="fas fa-external-link-alt"></i> Request Material
+                </a>
+              </div>
+            </div>
+
+            <!-- FAQ Item 7 -->
+            <div class="faq-item">
+              <button class="faq-question">
+                <span>Is my data safe?</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Absolutely! StudyHub doesn't require login and doesn't collect
+                  personal data. All your preferences, bookmarks, and progress
+                  are stored locally on your device using localStorage. We don't
+                  have access to any of your data.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ Item 8 -->
+            <div class="faq-item">
+              <button class="faq-question">
+                <span>How can I support StudyHub?</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>You can support StudyHub in several ways:</p>
+                <ul>
+                  <li>⭐ Star us on GitHub</li>
+                  <li>📢 Share with your friends</li>
+                  <li>☕ Buy us a coffee (donations welcome!)</li>
+                  <li>🐛 Report bugs or suggest features</li>
+                  <li>💻 Contribute to the codebase</li>
+                </ul>
+                <a href="#support" class="btn btn-primary btn-sm">
+                  <i class="fas fa-heart"></i> Support Us
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             ⭐ TESTIMONIALS
+        ============================================= -->
+      <section class="testimonials" id="testimonials">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">⭐ Reviews</span>
+            <h2>What Students <span class="gradient-text">Say</span></h2>
+            <p>Real reviews from real students using StudyHub.</p>
+          </div>
+
+          <div class="testimonials-grid">
+            <!-- Testimonial 1 -->
+            <div
+              class="testimonial-card"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "StudyHub saved my semester! Found all the notes I needed for my
+                exams. The PYQs section is a goldmine. Highly recommended for
+                every engineering student!"
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">RK</div>
+                <div class="author-info">
+                  <h4>Rahul Kumar</h4>
+                  <p>B.Tech CSE, 4th Year</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div
+              class="testimonial-card"
+              data-aos="fade-up"
+              data-aos-delay="150"
+            >
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "The Pomodoro timer and SGPA calculator are super useful. Love
+                the dark mode for late night studies. Best study app I've ever
+                used!"
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">PS</div>
+                <div class="author-info">
+                  <h4>Priya Sharma</h4>
+                  <p>BCA, 2nd Year</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div
+              class="testimonial-card"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <p class="testimonial-text">
+                "Finally an app that works offline! I can study even in areas
+                with poor network. The UI is beautiful and easy to navigate."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">AV</div>
+                <div class="author-info">
+                  <h4>Amit Verma</h4>
+                  <p>MCA, 1st Year</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div
+              class="testimonial-card"
+              data-aos="fade-up"
+              data-aos-delay="250"
+            >
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "The programming tutorials are amazing! Learned Python basics in
+                just a week. The syntax highlighting makes code so easy to
+                read."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">NS</div>
+                <div class="author-info">
+                  <h4>Neha Singh</h4>
+                  <p>B.Tech IT, 3rd Year</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div
+              class="testimonial-card"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "No ads, no login, no premium - just pure learning. This is how
+                education apps should be. Thank you, StudyHub team!"
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">VG</div>
+                <div class="author-info">
+                  <h4>Vikash Gupta</h4>
+                  <p>B.Sc Computer Science, 2nd Year</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 6 -->
+            <div
+              class="testimonial-card"
+              data-aos="fade-up"
+              data-aos-delay="350"
+            >
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "The syllabus tracker helped me stay organized throughout the
+                semester. Completed 100% of my syllabus before exams for the
+                first time!"
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">AR</div>
+                <div class="author-info">
+                  <h4>Anjali Rao</h4>
+                  <p>B.Tech ECE, 4th Year</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             👥 COMMUNITY SECTION
+        ============================================= -->
+      <section class="community" id="community">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">👥 Community</span>
+            <h2>Join Our <span class="gradient-text">Community</span></h2>
+            <p>
+              Connect with thousands of students, share resources, and get help.
+            </p>
+          </div>
+
+          <div class="community-grid" data-aos="fade-up" data-aos-delay="200">
+            <!-- Discord -->
+            <a
+              href="https://i-m-er-abhi.vercel.app"
+              target="_blank"
+              class="community-card discord"
+            >
+              <div class="community-icon">
+                <i class="fab fa-discord"></i>
+              </div>
+              <div class="community-content">
+                <h3>Discord Server</h3>
+                <p>
+                  Chat with students, get study help, and join discussion
+                  channels.
+                </p>
+                <span class="community-members">
+                  <i class="fas fa-users"></i> 2,500+ members
+                </span>
+              </div>
+              <div class="community-action">
+                <span>Join Server <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </a>
+
+            <!-- Telegram -->
+            <a
+              href="https://t.me/er_abhiiii"
+              target="_blank"
+              class="community-card telegram"
+            >
+              <div class="community-icon">
+                <i class="fab fa-telegram-plane"></i>
+              </div>
+              <div class="community-content">
+                <h3>Telegram Group</h3>
+                <p>
+                  Get instant updates, share resources, and connect with peers.
+                </p>
+                <span class="community-members">
+                  <i class="fas fa-users"></i> 5,000+ members
+                </span>
+              </div>
+              <div class="community-action">
+                <span>Join Group <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </a>
+
+            <!-- WhatsApp -->
+            <a
+              href="https://i-m-er-abhi.vercel.app"
+              target="_blank"
+              class="community-card whatsapp"
+            >
+              <div class="community-icon">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <div class="community-content">
+                <h3>WhatsApp Group</h3>
+                <p>
+                  Quick updates and resource sharing on your favorite messenger.
+                </p>
+                <span class="community-members">
+                  <i class="fas fa-users"></i> 1,000+ members
+                </span>
+              </div>
+              <div class="community-action">
+                <span>Join Group <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </a>
+
+            <!-- GitHub -->
+            <a
+              href="https://github.com/erabhishek12"
+              target="_blank"
+              class="community-card github"
+            >
+              <div class="community-icon">
+                <i class="fab fa-github"></i>
+              </div>
+              <div class="community-content">
+                <h3>GitHub Repository</h3>
+                <p>
+                  Contribute to the project, report issues, and suggest
+                  features.
+                </p>
+                <span class="community-members">
+                  <i class="fas fa-star"></i> 500+ stars
+                </span>
+              </div>
+              <div class="community-action">
+                <span>View Repo <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             ☕ SUPPORT / DONATE SECTION
+        ============================================= -->
+      <section class="support" id="support">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">❤️ Support</span>
+            <h2>Support <span class="gradient-text">StudyHub</span></h2>
+            <p>
+              StudyHub is free and open source. If you find it helpful, consider
+              supporting the project!
+            </p>
+          </div>
+
+          <div class="support-content" data-aos="fade-up" data-aos-delay="200">
+            <!-- Support Message -->
+            <div class="support-message">
+              <div class="message-icon">☕</div>
+              <h3>Help Keep StudyHub Free Forever</h3>
+              <p>
+                Running StudyHub requires time, effort, and resources. Your
+                support helps cover hosting costs and motivates continuous
+                development. Every contribution, no matter how small, makes a
+                difference!
+              </p>
+            </div>
+
+            <!-- Donation Options -->
+            <div class="donation-grid">
+              <!-- Buy Me a Coffee -->
+              <div
+                class="donation-card coffee"
+                data-aos="zoom-in"
+                data-aos-delay="100"
+              >
+                <div class="donation-icon">
+                  <i class="fas fa-mug-hot"></i>
+                </div>
+                <h3>Buy Me a Coffee</h3>
+                <p>Support with a quick one-time donation</p>
+                <a
+                  href="https://buymeacoffee.com/im_er_abhishek"
+                  target="_blank"
+                  class="btn btn-donation coffee-btn"
+                >
+                  <i class="fas fa-coffee"></i> Buy Coffee ☕
+                </a>
+              </div>
+
+              <!-- UPI QR Code -->
+              <div
+                class="donation-card upi"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+              >
+                <div class="donation-icon">
+                  <i class="fas fa-qrcode"></i>
+                </div>
+                <h3>UPI Payment</h3>
+                <p>Scan QR or use UPI ID</p>
+                <div class="upi-qr">
+                  <div class="qr-placeholder-small">
+                    <i class="fas fa-qrcode"></i>
+                  </div>
+                </div>
+                <p class="upi-id">9546983729@fam</p>
+                <button class="btn btn-donation upi-btn" id="copyUPI">
+                  <i class="fas fa-copy"></i> Copy UPI ID
+                </button>
+              </div>
+
+              <!-- PayPal -->
+              <div
+                class="donation-card paypal"
+                data-aos="zoom-in"
+                data-aos-delay="200"
+              >
+                <div class="donation-icon">
+                  <i class="fab fa-paypal"></i>
+                </div>
+                <h3>PayPal</h3>
+                <p>International payments accepted</p>
+                <a
+                  href="https://buymeacoffee.com/im_er_abhishek"
+                  target="_blank"
+                  class="btn btn-donation paypal-btn"
+                >
+                  <i class="fab fa-paypal"></i> Donate via PayPal
+                </a>
+              </div>
+
+              <!-- Ko-fi -->
+              <div
+                class="donation-card kofi"
+                data-aos="zoom-in"
+                data-aos-delay="250"
+              >
+                <div class="donation-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <h3>Ko-fi</h3>
+                <p>No account needed to donate</p>
+                <a
+                  href="https://buymeacoffee.com/im_er_abhishek"
+                  target="_blank"
+                  class="btn btn-donation kofi-btn"
+                >
+                  <i class="fas fa-heart"></i> Support on Ko-fi
+                </a>
+              </div>
+            </div>
+
+            <!-- Sponsor Wall -->
+            <div class="sponsor-wall" data-aos="fade-up" data-aos-delay="300">
+              <h3>🌟 Our Amazing Supporters</h3>
+              <p>Special thanks to everyone who has supported StudyHub!</p>
+              <div class="sponsors-list">
+                <div class="sponsor-item">
+                  <span class="sponsor-avatar">AK</span>
+                  <span class="sponsor-name">Arjun K.</span>
+                </div>
+                <div class="sponsor-item">
+                  <span class="sponsor-avatar">SM</span>
+                  <span class="sponsor-name">Sneha M.</span>
+                </div>
+                <div class="sponsor-item">
+                  <span class="sponsor-avatar">RJ</span>
+                  <span class="sponsor-name">Raj J.</span>
+                </div>
+                <div class="sponsor-item">
+                  <span class="sponsor-avatar">PT</span>
+                  <span class="sponsor-name">Priya T.</span>
+                </div>
+                <div class="sponsor-item">
+                  <span class="sponsor-avatar">VK</span>
+                  <span class="sponsor-name">Vikram K.</span>
+                </div>
+                <div class="sponsor-item more">
+                  <span class="sponsor-avatar">+50</span>
+                  <span class="sponsor-name">More Heroes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             📬 NEWSLETTER SIGNUP
+        ============================================= -->
+      <section class="newsletter" id="newsletter">
+        <div class="container">
+          <div class="newsletter-content" data-aos="fade-up">
+            <div class="newsletter-text">
+              <span class="section-badge">📬 Newsletter</span>
+              <h2>Stay <span class="gradient-text">Updated</span></h2>
+              <p>
+                Get notified about new features, resources, and study tips. No
+                spam, unsubscribe anytime.
+              </p>
+            </div>
+            <form class="newsletter-form" id="newsletterForm">
+              <div class="form-group">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  required
+                  id="newsletterEmail"
+                />
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-paper-plane"></i>
+                  <span>Subscribe</span>
+                </button>
+              </div>
+              <p class="form-note">
+                <i class="fas fa-lock"></i> We respect your privacy. Unsubscribe
+                anytime.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             📝 CONTACT FORM
+        ============================================= -->
+      <section class="contact" id="contact">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">📝 Contact</span>
+            <h2>Get in <span class="gradient-text">Touch</span></h2>
+            <p>
+              Have a question, suggestion, or just want to say hi? We'd love to
+              hear from you!
+            </p>
+          </div>
+
+          <div class="contact-content">
+            <!-- Contact Info -->
+            <div
+              class="contact-info"
+              data-aos="fade-right"
+              data-aos-delay="100"
+            >
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-content">
+                  <h3>Email</h3>
+                  <p>abhishekyadav954698@gmail.com</p>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="info-content">
+                  <h3>Response Time</h3>
+                  <p>Usually within 24 hours</p>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="info-content">
+                  <h3>Location</h3>
+                  <p>India 🇮🇳</p>
+                </div>
+              </div>
+
+              <div class="contact-social">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                  <a href="https://github.com/erabhishek12" aria-label="GitHub"
+                    ><i class="fab fa-github"></i
+                  ></a>
+                  <a href="https://i-m-er-abhi.vercel.app" aria-label="Twitter"
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                  <a href="https://i-m-er-abhi.vercel.app" aria-label="LinkedIn"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a href="https://i-m-er-abhi.vercel.app" aria-label="Instagram"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                  <a href="https://i-m-er-abhi.vercel.app" aria-label="YouTube"
+                    ><i class="fab fa-youtube"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <form
+              class="contact-form"
+              id="contactForm"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactName">Your Name *</label>
+                  <input
+                    type="text"
+                    id="contactName"
+                    placeholder="John Doe"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="contactEmail">Email Address *</label>
+                  <input
+                    type="email"
+                    id="contactEmail"
+                    placeholder="john@example.com"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactSubject">Subject *</label>
+                <select id="contactSubject" required>
+                  <option value="">Select a topic</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="bug">Bug Report</option>
+                  <option value="feature">Feature Request</option>
+                  <option value="content">Content Request</option>
+                  <option value="partnership">Partnership</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage">Message *</label>
+                <textarea
+                  id="contactMessage"
+                  rows="5"
+                  placeholder="Your message here..."
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg btn-block">
+                <i class="fas fa-paper-plane"></i>
+                <span>Send Message</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             🎯 FINAL CTA SECTION
+        ============================================= -->
+      <section class="final-cta" id="cta">
+        <div class="container">
+          <div class="cta-content" data-aos="zoom-in">
+            <h2>
+              Ready to
+              <span class="gradient-text-white">Boost Your Studies?</span>
+            </h2>
+            <p>
+              Join thousands of students already using StudyHub. Start your
+              journey to academic excellence today!
+            </p>
+            <div class="cta-buttons">
+              <a href="https://ranvircmd.github.io/javasourcecode/" class="btn btn-white btn-lg" id="ctaLaunchBtn">
+                <i class="fas fa-rocket"></i>
+                <span>Launch App Now</span>
+              </a>
+              <a
+                href="#"
+                class="btn btn-outline-white btn-lg"
+                id="ctaInstallBtn"
+              >
+                <i class="fas fa-download"></i>
+                <span>Install App</span>
+              </a>
+            </div>
+            <div class="cta-features">
+              <span><i class="fas fa-check"></i> 100% Free</span>
+              <span><i class="fas fa-check"></i> No Login</span>
+              <span><i class="fas fa-check"></i> Works Offline</span>
+              <span><i class="fas fa-check"></i> No Ads</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             👨‍💻 DEVELOPER SECTION
+        ============================================= -->
+      <section class="developer" id="developer">
+        <div class="container">
+          <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">👨‍💻 Creator</span>
+            <h2>Meet the <span class="gradient-text">Developer</span></h2>
+          </div>
+
+          <div class="developer-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="developer-avatar">
+              <div class="avatar-ring"></div>
+              <span class="avatar-emoji">👨‍💻</span>
+            </div>
+            <div class="developer-info">
+              <h3>Abhishek</h3>
+              <p class="developer-title">Full-Stack Developer & Creator</p>
+              <p class="developer-bio">
+                Passionate about creating tools that make learning easier and
+                more accessible. Built StudyHub to help students like me who
+                struggled to find quality study materials in one place. When not
+                coding, you'll find me exploring new technologies or playing
+                video games.
+              </p>
+              <div class="developer-socials">
+                <a
+                  href="https://github.com/erabhishek12"
+                  target="_blank"
+                  aria-label="GitHub"
+                >
+                  <i class="fab fa-github"></i>
+                </a>
+                <a
+                  href="https://i-m-er-abhi.vercel.app"
+                  target="_blank"
+                  aria-label="LinkedIn"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="https://i-m-er-abhi.vercel.app"
+                  target="_blank"
+                  aria-label="Twitter"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a
+                  href="https://instagram.com/naturelensbyabhi"
+                  target="_blank"
+                  aria-label="Instagram"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+              <a
+                href="https://i-m-er-abhi.vercel.app"
+                target="_blank"
+                class="btn btn-primary"
+              >
+                <i class="fas fa-globe"></i>
+                <span>Visit Portfolio</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================
+         📄 FOOTER
+    ============================================= -->
+    <footer class="footer" id="footer">
+      <div class="container">
+        <!-- Footer Top -->
+        <div class="footer-top">
+          <!-- Brand Column -->
+          <div class="footer-brand">
+            <a href="#home" class="footer-logo">
+              <span class="logo-icon">📚</span>
+              <span class="logo-text">StudyHub</span>
+            </a>
+            <p>
+              Your ultimate study companion. Access notes, videos, PYQs, and
+              tutorials all in one place. Built with ❤️ for students.
+            </p>
+            <div class="footer-social">
+              <a href="" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/erabhishek12" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="https://i-m-er-abhi.vercel.app" aria-label="LinkedIn"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="https://instagram.com/naturelensbyabhi" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://i-m-er-abhi.vercel.app" aria-label="YouTube"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#resources">Resources</a></li>
+              <li><a href="#tools">Tools</a></li>
+              <li><a href="#roadmap">Roadmap</a></li>
+            </ul>
+          </div>
+
+          <!-- Resources -->
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Notes</a></li>
+              <li><a href="#">Videos</a></li>
+              <li><a href="#">PYQs</a></li>
+              <li><a href="#">Tutorials</a></li>
+              <li><a href="#">Cheatsheets</a></li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div class="footer-column">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+              <li>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSeE2QjRDeyfPm3CXezjlMPuzfE-nPhquPiPU_mPp2lfK8Vuww/viewform"
+                  target="_blank"
+                  >Request Material</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSeE2QjRDeyfPm3CXezjlMPuzfE-nPhquPiPU_mPp2lfK8Vuww/viewform"
+                  target="_blank"
+                  >Report Bug</a
+                >
+              </li>
+              <li><a href="#support">Donate</a></li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <p>
+            &copy; 2024 StudyHub. Made with ❤️ by
+            <a href="https://i-m-er-abhi.vercel.app" target="_blank"
+              >Abhishek</a
+            >
+          </p>
+          <div class="footer-badges">
+            <span><i class="fas fa-mobile-alt"></i> PWA</span>
+            <span><i class="fas fa-wifi-slash"></i> Offline Ready</span>
+            <span><i class="fas fa-lock-open"></i> No Login</span>
+            <span><i class="fas fa-dollar-sign"></i> Free Forever</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============================================
+         🔔 TOAST NOTIFICATIONS
+    ============================================= -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ============================================
+         EXTERNAL SCRIPTS
+    ============================================= -->
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
