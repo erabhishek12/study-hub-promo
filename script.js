@@ -60,6 +60,8 @@ const CONFIG = {
     
     // ==================== VIDEO DEMO PLAYER ====================
 
+// ==================== VIDEO DEMO PLAYER ====================
+
 document.addEventListener("DOMContentLoaded", () => {
   initVideoPlayer();
 });
@@ -69,95 +71,51 @@ function initVideoPlayer() {
   const videoThumbnail = document.getElementById("videoThumbnail");
   const videoIframe = document.getElementById("videoIframe");
 
-  if (!playButton || !videoThumbnail || !videoIframe) return;
+  if (!playButton || !videoThumbnail || !videoIframe) {
+    console.warn("Video player elements not found");
+    return;
+  }
 
   const YT_VIDEO_ID = "UB_x2BTmlCk";
 
   // Click on play button
   playButton.addEventListener("click", (e) => {
     e.preventDefault();
-    loadVideo(YT_VIDEO_ID, videoThumbnail, videoIframe);
+    e.stopPropagation();
+    playVideo(YT_VIDEO_ID, videoThumbnail, videoIframe);
   });
 
   // Click anywhere on thumbnail
-  videoThumbnail.addEventListener("click", (e) => {
-    if (e.target !== playButton && !playButton.contains(e.target)) {
-      loadVideo(YT_VIDEO_ID, videoThumbnail, videoIframe);
-    }
-  });
-
-  // Keyboard accessibility
-  playButton.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      loadVideo(YT_VIDEO_ID, videoThumbnail, videoIframe);
-    }
+  videoThumbnail.addEventListener("click", () => {
+    playVideo(YT_VIDEO_ID, videoThumbnail, videoIframe);
   });
 }
 
-function loadVideo(videoId, thumbnail, iframeContainer) {
-  // Show loading state
-  thumbnail.innerHTML = `
-    <div class="video-loading">
-      <div class="video-loading-spinner"></div>
-      <span class="video-loading-text">Loading video...</span>
-    </div>
-  `;
-
-  // Small delay for UX
+function playVideo(videoId, thumbnail, iframeContainer) {
+  // Directly hide thumbnail and show video (no loading spinner)
+  thumbnail.style.opacity = "0";
+  thumbnail.style.transition = "opacity 0.3s ease";
+  
+  // Create and inject iframe immediately
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+  iframe.title = "StudyHub Demo Video";
+  iframe.frameBorder = "0";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+  iframe.allowFullscreen = true;
+  iframe.style.cssText = "width: 100%; height: 100%; border: none;";
+  
+  // Clear and add iframe
+  iframeContainer.innerHTML = "";
+  iframeContainer.appendChild(iframe);
+  
+  // Hide thumbnail after fade
   setTimeout(() => {
-    // Hide thumbnail
     thumbnail.style.display = "none";
-
-    // Inject iframe with optimized parameters
-    iframeContainer.innerHTML = `
-      <iframe 
-        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
-        title="StudyHub Demo Video"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
-    `;
-
-    // Track video play (optional analytics)
-    console.log("🎬 Video started playing:", videoId);
-    
-    // You can add analytics here
-    // gtag('event', 'video_play', { video_id: videoId });
-
   }, 300);
+
+  console.log("🎬 Video playing:", videoId);
 }
-
-// Optional: Intersection Observer for lazy loading
-function initLazyVideoLoad() {
-  const videoSection = document.getElementById("demo");
-  if (!videoSection) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Preload thumbnail when section is visible
-          const thumbnail = document.querySelector(".video-thumbnail img");
-          if (thumbnail) {
-            thumbnail.loading = "eager";
-          }
-          observer.disconnect();
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  observer.observe(videoSection);
-}
-
-// Initialize lazy loading
-document.addEventListener("DOMContentLoaded", initLazyVideoLoad);
-
-
 /* ============================================
    2. DOM ELEMENT REFERENCES
    ============================================ */
