@@ -58,33 +58,36 @@ const CONFIG = {
         requestMaterial: 'https://docs.google.com/forms/d/e/1FAIpQLSeE2QjRDeyfPm3CXezjlMPuzfE-nPhquPiPU_mPp2lfK8Vuww/viewform'
     },
     
-    // Video Demo - Replace with your actual video ID
-    videoId: 'dQw4w9WgXcQ',
-    
-    // Typing Animation Words
-    typingWords: ['Notes', 'Videos', 'PYQs', 'Tutorials', 'Success'],
-    typingSpeed: 100,
-    deletingSpeed: 50,
-    pauseDuration: 2000,
-    
-    // Animation Timings
-    preloaderMinDuration: 2000,
-    toastDuration: 4000,
-    scrollThreshold: 100,
-    
-    // Counter Animation
-    counterDuration: 2000,
-    
-    // Cookie Settings
-    cookieExpiry: 365, // days
-    
-    // Local Storage Keys
-    storageKeys: {
-        cookieConsent: 'studyhub_cookie_consent',
-        theme: 'studyhub_theme',
-        newsletter: 'studyhub_newsletter_subscribed'
-    }
-};
+    // ==================== VIDEO DEMO PLAYER ====================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const playButton = document.getElementById("playButton");
+  const videoThumbnail = document.getElementById("videoThumbnail");
+  const videoIframe = document.getElementById("videoIframe");
+
+  if (!playButton || !videoThumbnail || !videoIframe) return;
+
+  const YT_VIDEO_ID = "UB_x2BTmlCk";
+
+  playButton.addEventListener("click", () => {
+    // Hide thumbnail
+    videoThumbnail.style.display = "none";
+
+    // Inject iframe
+    videoIframe.innerHTML = `
+      <iframe 
+        width="100%" 
+        height="100%"
+        src="https://www.youtube.com/embed/${YT_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1"
+        title="StudyHub Demo Video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    `;
+  });
+});
+
 
 /* ============================================
    2. DOM ELEMENT REFERENCES
